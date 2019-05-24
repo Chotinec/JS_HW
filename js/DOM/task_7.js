@@ -8,24 +8,26 @@ const left = document.querySelector("#left");
 const right = document.querySelector("#right");
 const items = document.querySelector("#items");
 
-var count = 0;
+var computedSstyle = getComputedStyle(items);
 
 right.addEventListener("click", function(e) {
   // напишите здесь код, который сдвигает items на 100px вправо
   // если items уже сдвинут на 5 элементов впарво, то больше элементы сдвигать не надо, т.к. вы достигли конца списка
-  var style = getComputedStyle(items.parentNode.parentNode);
-  if (count < 5) {
-    items.parentNode.parentNode.style.paddingLeft = parseInt(style.paddingLeft) + 100 + 'px';
-    count++;
+  e.preventDefault();
+  let right = parseInt(computedSstyle.right);
+
+  if (right < 500) {
+    items.style.right = right + 100 + 'px';
   }
 });
 
-left.addEventListener("click", function() {
+left.addEventListener("click", function(e) {
   // напишите здесь код, который сдвигает items на 100px влево
   // если item находится в самом начале, то больше элементы сдвигать влево не надо, т.к. вы достигли начала списка
-  var style = getComputedStyle(items.parentNode.parentNode);
-  if (count > 0) {
-    items.parentNode.parentNode.style.paddingLeft = parseInt(style.paddingLeft) - 100 + 'px';
-    count--;
+  e.preventDefault();
+  let right = parseInt(computedSstyle.right);
+
+  if (right > 0) {
+    items.style.right = right - 100 + 'px';
   }
 });
